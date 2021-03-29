@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>PARTYs</h2>
+  <hr>
+
+  {% for party in partys %}
+    <h3>{{ party.pk }}. {{ party.title }}</h3>
+    <p>{{ party.genre }} + {{ party.member }}팀</p>
+    <p>by {{ party.user }}</p>
+    <a href="{% url 'blocks:detail' party.pk %}">DETAIL</a>
+    <hr>
+  {% empty %}
+    <h2>아직 만들어진 party가 없습니다.😥</h2>
+  {% endfor %}
+  
+{% endblock content %}

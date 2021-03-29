@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>START PARTY</h2>
+  <hr>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <button>등록</button>
+  </form>
+
+  <a href="{% url 'blocks:index' %}">BACK</a>
+{% endblock content %}

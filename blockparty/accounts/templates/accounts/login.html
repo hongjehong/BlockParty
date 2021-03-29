@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>LOGIN</h2>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ auth_form.as_p }}
+    <button>로그인</button>
+  </form>
+
+  <a href="{% url 'blocks:index' %}">BACK</a>
+{% endblock content %}
+

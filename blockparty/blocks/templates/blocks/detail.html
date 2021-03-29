@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h3> Details</h3>
+  <hr>
+
+  <h1>{{ party.title }}</h1>
+  <h4>장르: {{ party.genre }}</h4>
+  <p>{{ party.member }}팀 모집</p>
+  <hr>
+
+  <p>내용: {{ party.content }}</p>
+  <p>{{ party.created_at }}</p>
+  <hr>
+
+  <form action="{% url 'blocks:update' party.pk %}">
+    <button>UPDATE</button>
+  </form>
+  <form action="{% url 'blocks:delete' party.pk %}" method="POST">
+    {% csrf_token %}
+    <button>DELETE</button>
+  </form>
+  <hr>
+
+  <h4>댓글 작성</h4>
+  <form action="{% url 'blocks:participate' party.pk %}" method="POST">
+    {% csrf_token %}
+    {{ participate_form.as_p }}
+    <button>등록</button>
+  </form>
+  <br>
+
+  <h3>댓글 리스트</h3>
+  {% for participate in participates %}
+    <p>{{ participate.user }}: {{ participate.content }}
+      <form action="{% url 'blocks:participate_delete' party.pk participate.pk %}" method="POST">
+        {% csrf_token %}
+        <button>DELETE</button>
+      </form>
+    </p>
+    <br>
+  {% empty %}
+    <p>아직 파티원이 없습니다.🥺</p>
+  {% endfor %}
+  <hr>
+  <a href="{% url 'blocks:index' %}">BACK</a>
+{% endblock content %}

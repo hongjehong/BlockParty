@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>UPDATE</h2>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ party_form.as_p }}
+    <button>수정하기</button>
+  </form>
+
+  <a href="{% url 'blocks:index' %}">BACK</a>
+{% endblock content %}
